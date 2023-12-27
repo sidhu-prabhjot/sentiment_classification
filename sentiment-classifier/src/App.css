@@ -5,6 +5,13 @@ h1 {
   padding-bottom: 20px;
 }
 
+h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
 .selection-row {
   background-color: #2b3035; /* Set the background color to black */
   color: white; /* Set the text color to white or any contrasting color */
@@ -30,6 +37,21 @@ h1 {
 
 .submit-spinner-container {
   justify-content: center;
+  margin-bottom: 20px;
+}
+
+.feedback-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.alert-text {
+  text-align: center;
+}
+
+.submit-form-button {
   margin-bottom: 20px;
 }
 

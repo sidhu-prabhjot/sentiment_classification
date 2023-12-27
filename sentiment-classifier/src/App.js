@@ -167,6 +167,40 @@ function App() {
                 alertType={popupType}
               ></AlertPopup>
             </div>
+            <div
+              className="feedback-form-container"
+              style={{ display: displayPopup }}
+            >
+              <h3>Feedback:</h3>
+              <Form>
+                {["radio"].map((type) => (
+                  <div key={`inline-${type}`} className="mb-3">
+                    <Form.Check
+                      inline
+                      label="correct classification"
+                      name="group1"
+                      type={type}
+                      id={`inline-${type}-1`}
+                    />
+                    <Form.Check
+                      inline
+                      label="wrong classification"
+                      name="group1"
+                      type={type}
+                      id={`inline-${type}-2`}
+                    />
+                  </div>
+                ))}
+              </Form>
+              <p className="alert-text">
+                *Please note that your email, review, and sentiment will be
+                added to a database and may be reviewed so it can be used to
+                train an updated model of the Sentiment Classifier.
+              </p>
+              <Button className="submit-form-button" variant="primary">
+                Submit
+              </Button>{" "}
+            </div>
           </Row>
         </Col>
         <Col></Col>
