@@ -14,6 +14,13 @@ db = Database(reset=True)
 db.create_tables()
 
 class PredictionHandler(BaseHTTPRequestHandler):
+    def do_OPTIONS(self):
+        self.send_response(200, "OK")
+        self.send_header("Access-Control-Allow-Origin", "http://localhost:3000")  # Allow requests from any origin (replace with your front-end URL in production)
+        self.send_header("Access-Control-Allow-Methods", "POST, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.end_headers()
+
     def do_POST(self):
         content_length = int(self.headers['Content-Length'])
         post_data = self.rfile.read(content_length)
@@ -39,6 +46,7 @@ class PredictionHandler(BaseHTTPRequestHandler):
 
         # Assuming a binary classification, you might want to return probabilities or classes
         self.send_response(200)
+        self.send_header('Access-Control-Allow-Origin', 'http://localhost:3000') 
         self.send_header('Content-type', 'application/json')
         self.end_headers()
         self.wfile.write(json.dumps({'predictions': output_tensor.tolist()}).encode('utf-8'))

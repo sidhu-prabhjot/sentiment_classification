@@ -29,8 +29,8 @@ h1 {
 }
 
 .submit-spinner-container {
-  display: none;
   justify-content: center;
+  margin-bottom: 20px;
 }
 
 .learn-more-row {

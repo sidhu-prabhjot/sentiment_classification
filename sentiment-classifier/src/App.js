@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import "./App.css";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
@@ -12,8 +13,82 @@ import "bootstrap/dist/css/bootstrap.min.css";
 //import components
 import SoftwareCard from "../src/components/SoftwareCard";
 import InfoCard from "../src/components/InfoCard";
+import AlertPopup from "../src/components/AlertPopup";
+
+const handlePredictRequest = async (reviewData) => {
+  const postData = {
+    examples: reviewData,
+  };
+
+  try {
+    const response = await fetch("http://127.0.0.1:4000/predict", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(postData),
+    });
+
+    const data = await response.json();
+    const prediction = data.predictions[0][0];
+    console.log("Response from server:", prediction);
+    return prediction;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error; // Propagate the error up the chain
+  }
+};
 
 function App() {
+  //state variables
+  const [textAreaValue, setTextAreaValue] = useState("");
+  const [prediction, setPrediction] = useState(0);
+  const [displayLoading, setDisplayLoading] = useState("none");
+  const [sentimentHeader, setSentimentHeader] = useState("Positive");
+  const [sentimentText, setSentimentText] = useState(
+    "The review that you entered was detected as a POSITIVE review. If this was either correct or wrong, please let us know by filling the form below!"
+  );
+  const [popupType, setPopupType] = useState("success");
+  const [displayPopup, setDisplayPopup] = useState("none");
+
+  //handle textArea state change
+  const handleTextAreaChange = (event) => {
+    setTextAreaValue(event.target.value);
+  };
+
+  //submit a review handler
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log("Textarea Value:", textAreaValue);
+    setDisplayLoading("flex");
+
+    try {
+      const result = await handlePredictRequest([textAreaValue]);
+      setPrediction(result);
+
+      // Update popup based on the prediction result
+      setDisplayLoading("none");
+      setDisplayPopup("flex");
+
+      if (result < 0.5) {
+        setPopupType("danger");
+        setSentimentHeader("Negative");
+        setSentimentText(
+          "The review that you entered was detected as a NEGATIVE review. If this was either correct or wrong, please let us know by filling the form below!"
+        );
+      } else {
+        setPopupType("success");
+        setSentimentHeader("Positive");
+        setSentimentText(
+          "The review that you entered was detected as a POSITIVE review. If this was either correct or wrong, please let us know by filling the form below!"
+        );
+      }
+    } catch (error) {
+      console.error("Error in handleSubmit:", error);
+      setDisplayLoading("none");
+    }
+  };
+
   return (
     <Container fluid style={{ backgroundColor: "#2b3035" }}>
       <Navbar className="bg-body-tertiary" data-bs-theme="dark">
@@ -62,7 +137,12 @@ function App() {
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>Review Text (Max 500 Characters)</Form.Label>
-              <Form.Control maxLength={500} as="textarea" rows={3} />
+              <Form.Control
+                maxLength={500}
+                as="textarea"
+                rows={3}
+                onChange={handleTextAreaChange}
+              />
             </Form.Group>
           </Form>
           <Row className="button-spinner-row">
@@ -70,11 +150,22 @@ function App() {
               className="submission-button"
               variant="outline-success"
               size="lg"
+              onClick={handleSubmit}
             >
               Submit
             </Button>
-            <div className="submit-spinner-container">
+            <div
+              className="submit-spinner-container"
+              style={{ display: displayLoading }}
+            >
               <Spinner animation="border" variant="light" />
+            </div>
+            <div style={{ display: displayPopup }}>
+              <AlertPopup
+                alertHeading={sentimentHeader}
+                alertText={sentimentText}
+                alertType={popupType}
+              ></AlertPopup>
             </div>
           </Row>
         </Col>
