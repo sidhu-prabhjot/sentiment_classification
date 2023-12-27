@@ -1,7 +1,7 @@
-from flask import Flask, request, jsonify
+from http.server import BaseHTTPRequestHandler, HTTPServer
+import json
 import tensorflow as tf
-
-app = Flask(__name__)
+from review_data_sql import Database
 
 # Load the TensorFlow model
 loaded_model = tf.saved_model.load("sentiment_model")
@@ -10,20 +10,27 @@ loaded_model = tf.saved_model.load("sentiment_model")
 inference_func = loaded_model.signatures["serving_default"]
 print("*****keys: ", str(loaded_model.signatures.keys()), "*****")
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    try:
-        data = request.json
-        print(data)
+db = Database(reset=True)
+db.create_tables()
+
+class PredictionHandler(BaseHTTPRequestHandler):
+    def do_POST(self):
+        content_length = int(self.headers['Content-Length'])
+        post_data = self.rfile.read(content_length)
+        data = json.loads(post_data.decode('utf-8'))
+
         if not data or 'examples' not in data:
-            return jsonify({'error': 'Invalid input format'}), 400
+            self.send_response(400)
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({'error': 'Invalid input format'}).encode('utf-8'))
+            return
 
         examples = data['examples']
         print(examples)
 
         # Make predictions using the specific signature
         predictions = inference_func(text_vectorization_input=tf.constant(examples))
-
         print(predictions)
 
         # Extract the output tensor (assuming a single output)
@@ -31,11 +38,13 @@ def predict():
         print(output_tensor)
 
         # Assuming a binary classification, you might want to return probabilities or classes
-        return jsonify({'predictions': output_tensor.tolist()})
-
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        self.send_response(200)
+        self.send_header('Content-type', 'application/json')
+        self.end_headers()
+        self.wfile.write(json.dumps({'predictions': output_tensor.tolist()}).encode('utf-8'))
 
 if __name__ == '__main__':
-    # Use a production-ready server like Gunicorn
-    app.run(debug=True, port=4000)
+    server_address = ('', 4000)
+    httpd = HTTPServer(server_address, PredictionHandler)
+    print('Starting server on port 4000...')
+    httpd.serve_forever()
