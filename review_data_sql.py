@@ -25,26 +25,31 @@ class Database():
 
         cursor.execute('''CREATE TABLE IF NOT EXISTS reviews
                         (review_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        review_text VARCHAR(140) NOT NULL,
+                        review_email VARCHAR(250) NOT NULL,
+                        review_text VARCHAR(500) NOT NULL,
                         review_sentiment INTEGER NOT NULL CHECK (review_sentiment IN (0, 1)),
                         correct_classification INTEGER NOT NULL CHECK (correct_classification IN (0, 1)))''')
 
         self.conn.commit()
         cursor.close()
 
-    def add_review(self, review, sentiment, correct):
+    def add_review(self, email, review, sentiment, correct):
         cursor = self.conn.cursor()
         # review is the review_text
         # sentiment is the review_sentiment
         # correct is the correct_classification
 
-        print("hello WORLD")
-
         params = []
-        query = "INSERT INTO reviews (review_text, review_sentiment, correct_classification) VALUES (?, ?, ?)"
+        query = "INSERT INTO reviews (review_email, review_text, review_sentiment, correct_classification) VALUES (?, ?, ?, ?)"
 
-        # check if review is below 140 characters and not null
-        if not review or not isinstance(review, str) or len(review) > 140:
+        #check if email is below 250 characters and not null
+        if not email or not isinstance(email, str) or len(email) > 250:
+            return -1
+        else:
+            params.append(email)
+        
+        # check if review is below 500 characters and not null
+        if not review or not isinstance(review, str) or len(review) > 500:
             return -1
         else:
             params.append(review)
@@ -80,7 +85,7 @@ class Database():
             reviews = cursor.fetchall()
 
             for review in reviews:
-                print(f"Review ID: {review[0]}, Text: {review[1]}, Sentiment: {review[2]}, Correct Classification: {review[3]}")
+                print(f"Review ID: {review[0]}, Email: {review[1]} Text: {review[2]}, Sentiment: {review[3]}, Correct Classification: {review[4]}")
 
         except sqlite3.Error as e:
             print("An error occurred while retrieving reviews from the database: " + str(e))

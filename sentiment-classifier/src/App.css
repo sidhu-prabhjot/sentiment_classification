@@ -47,6 +47,10 @@ h3 {
   align-items: center;
 }
 
+.alert-popup-container {
+  justify-content: center;
+}
+
 .alert-text {
   text-align: center;
 }
@@ -95,4 +99,14 @@ h3 {
 
 .about-accordion {
   padding: 0px 20px 20px 20px;
+}
+
+/*login page styling*/
+.login-form-row {
+  display: flex;
+  justify-content: center;
+  background-color: #2b3035; /* Set the background color to black */
+  color: white; /* Set the text color to white or any contrasting color */
+  padding-bottom: 20px; /* Add padding to create space between content and edges */
+  padding-top: 40px;
 }
