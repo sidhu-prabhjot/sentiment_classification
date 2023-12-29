@@ -102,6 +102,12 @@ h3 {
 }
 
 /*login page styling*/
+.body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .login-form-row {
   display: flex;
   justify-content: center;
@@ -109,4 +115,19 @@ h3 {
   color: white; /* Set the text color to white or any contrasting color */
   padding-bottom: 20px; /* Add padding to create space between content and edges */
   padding-top: 40px;
+}
+
+.subtext-row {
+  display: flex;
+  justify-content: center;
+  color: white; /* Set the text color to white or any contrasting color */
+}
+
+.login-subtext {
+  text-align: center;
+}
+
+.login-button,
+.signUp-button {
+  margin-bottom: 20px;
 }

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./App.css";
+import { getAuth } from "firebase/auth";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Row from "react-bootstrap/Row";
@@ -60,6 +62,9 @@ const handleSaveToDatabaseRequest = async (feedbackData) => {
 
 function Main() {
   //state variables
+  const navigate = useNavigate();
+  const auth = getAuth();
+  const [userEmail, setUserEmail] = useState(auth.currentUser.email);
   const [textAreaValue, setTextAreaValue] = useState("");
   const [prediction, setPrediction] = useState(0);
   const [displayLoading, setDisplayLoading] = useState("none");
@@ -164,7 +169,7 @@ function Main() {
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
-              Signed in as: <a href="#login">Mark Otto</a>
+              Signed in as: <span style={{ color: "white" }}>{userEmail}</span>
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
