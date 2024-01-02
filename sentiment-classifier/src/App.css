@@ -101,6 +101,10 @@ h3 {
   padding: 0px 20px 20px 20px;
 }
 
+.non-link-text {
+  color: white;
+}
+
 /*login page styling*/
 .body {
   height: 100vh;

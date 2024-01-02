@@ -94,8 +94,7 @@ const Login = () => {
       .then((userCredential) => {
         // Signed up
         const user = userCredential.user;
-        console.log(user);
-        console.log(auth.currentUser.email);
+        localStorage.setItem("email", JSON.stringify(auth.currentUser.email));
         // Navigate to the home page after successful signup
         navigate("/home");
       })

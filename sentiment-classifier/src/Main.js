@@ -62,9 +62,8 @@ const handleSaveToDatabaseRequest = async (feedbackData) => {
 
 function Main() {
   //state variables
-  const navigate = useNavigate();
-  const auth = getAuth();
-  const [userEmail, setUserEmail] = useState(auth.currentUser.email);
+  const storedUserEmail = localStorage.getItem("email");
+  const userEmail = storedUserEmail ? JSON.parse(storedUserEmail) : null;
   const [textAreaValue, setTextAreaValue] = useState("");
   const [prediction, setPrediction] = useState(0);
   const [displayLoading, setDisplayLoading] = useState("none");
@@ -129,7 +128,7 @@ function Main() {
   //handle submitting feedback
   const handleSubmitFeedback = async (event) => {
     //values to send to server to save to database
-    const email = "temp@outlook.com";
+    const email = userEmail;
     const review = textAreaValue;
     let sentiment = 1;
 
@@ -353,12 +352,7 @@ function Main() {
         <h1>About</h1>
         <Col></Col>
         <Col xs={8}>
-          <Accordion
-            className="about-accordion"
-            defaultActiveKey="0"
-            data-bs-theme="dark"
-            flush
-          >
+          <Accordion className="about-accordion" data-bs-theme="dark" flush>
             <Accordion.Item eventKey="0">
               <Accordion.Header>Technology Stack</Accordion.Header>
               <Accordion.Body>
@@ -424,11 +418,9 @@ function Main() {
         <Col></Col>
       </Row>
       <Row className="footer-row">
-        <Col className="footer-column">
-          <a className="footer-link">Prabhjot Sidhu 2023</a>
-        </Col>
-        <Col className="footer-column">
-          <a className="footer-link">sidhu.prabhjot@outlook.com</a>
+        <Col className="footer-column non-link-text">Prabhjot Sidhu 2023</Col>
+        <Col className="footer-column non-link-text">
+          sidhu.prabhjot@outlook.com
         </Col>
         <Col className="footer-column">
           <a
