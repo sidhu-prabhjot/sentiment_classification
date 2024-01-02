@@ -14,14 +14,11 @@ const InfoCard = ({
       style={{ width: "16rem", overflow: "hidden", marginBottom: "20px" }}
     >
       <Card.Header style={{ backgroundColor: "#262a2e", color: "#adb5bd" }}>
-        Header
+        {cardHeader}
       </Card.Header>
       <Card.Body style={{ backgroundColor: "#212529" }}>
-        <Card.Title style={{ color: "#adb5bd" }}>Danger Card Title</Card.Title>
-        <Card.Text style={{ color: "#adb5bd" }}>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
+        <Card.Title style={{ color: "#adb5bd" }}>{cardTitle}</Card.Title>
+        <Card.Text style={{ color: "#adb5bd" }}>{cardText}</Card.Text>
       </Card.Body>
     </Card>
   );

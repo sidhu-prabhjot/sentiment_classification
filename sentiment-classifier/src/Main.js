@@ -292,31 +292,58 @@ function Main() {
         <Col></Col>
       </Row>
       <Row className="learn-more-row">
-        <h1>Features</h1>
+        <h1>Webpage Features</h1>
         <Col className="info-card-column">
-          <InfoCard borderStyle="primary"></InfoCard>
+          <InfoCard
+            borderStyle="primary"
+            cardHeader="positive or negative?"
+            cardTitle="Classify Reviews"
+            cardText="The sentiment classifier is able to classify reviews as positive or negative using machine learning."
+          ></InfoCard>
         </Col>
         <Col className="info-card-column">
-          <InfoCard borderStyle="success"></InfoCard>
+          <InfoCard
+            borderStyle="success"
+            cardHeader="powered by Tensorflow"
+            cardTitle="Machine Learning"
+            cardText="The sentiment classifier was constructed using Google's open-source machine learning framework."
+          ></InfoCard>
         </Col>
         <Col className="info-card-column">
-          <InfoCard borderStyle="danger"></InfoCard>
+          <InfoCard
+            borderStyle="danger"
+            cardHeader="improving with your help"
+            cardTitle="Continous Learning"
+            cardText="Through feedback, the sentiment classifier will learn more with new data."
+          ></InfoCard>
         </Col>
         <Col className="info-card-column">
-          <InfoCard borderStyle="warning"></InfoCard>
+          <InfoCard
+            borderStyle="info"
+            cardHeader="modern frameworks"
+            cardTitle="React JS"
+            cardText="The front-end of the sentiment classifier was constructed with React JS."
+          ></InfoCard>
         </Col>
         <Col className="info-card-column">
-          <InfoCard borderStyle="info"></InfoCard>
+          <InfoCard
+            borderStyle="warning"
+            cardHeader="secure authentication"
+            cardTitle="Firebase"
+            cardText="Access to the sentiment classifier is secured with Firebase Authentication."
+          ></InfoCard>
         </Col>
         <Row>
           <Col></Col>
           <Col>
             <p className="section-subtext">
-              At vero eos et accusamus et iusto odio dignissimos ducimus qui
-              blanditiis praesentium voluptatum deleniti atque corrupti quos
-              dolores et quas molestias excepturi sint occaecati cupiditate non
-              provident, similique sunt in culpa qui officia deserunt mollitia
-              animi, id est laborum et dolorum fuga.
+              I am building a sentiment classification platform for honest
+              expression. With Firebase Authentication ensuring user security,
+              React.js for a user-friendly interface, and Python with TensorFlow
+              for accurate sentiment analysis, my goal is to provide a simple
+              yet powerful tool. As a student, I aim to create a practical
+              solution that helps users express and understand sentiments
+              effectively.
             </p>
           </Col>
           <Col></Col>
@@ -333,39 +360,63 @@ function Main() {
             flush
           >
             <Accordion.Item eventKey="0">
-              <Accordion.Header>Accordion Item #1</Accordion.Header>
+              <Accordion.Header>Technology Stack</Accordion.Header>
               <Accordion.Body>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <p>Languages and Markups</p>
+                <ul>
+                  <li>Python</li>
+                  <li>JavaScript</li>
+                  <li>HTML</li>
+                  <li>CSS</li>
+                  <li>JSX</li>
+                  <li>SQL</li>
+                </ul>
+                <p>Frameworks and Services</p>
+                <ul>
+                  <li>Google Tensorflow</li>
+                  <li>React JS</li>
+                  <li>Bootstrap</li>
+                  <li>SQLite</li>
+                  <li>Firebase</li>
+                </ul>
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="1">
-              <Accordion.Header>Accordion Item #2</Accordion.Header>
+              <Accordion.Header>Upcoming Updates</Accordion.Header>
               <Accordion.Body>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <p>In order of priority</p>
+                <ol>
+                  <li>Building hatespeech detecor</li>
+                  <li>Reading multiple reviews at one time</li>
+                </ol>
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="2">
-              <Accordion.Header>Accordion Item #2</Accordion.Header>
+              <Accordion.Header>More</Accordion.Header>
               <Accordion.Body>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <ul>
+                  <li>
+                    🚀 Explore my creative journey! Visit my portfolio website
+                    to dive into a collection of my latest projects, showcasing
+                    my skills and passion. Discover the stories behind each
+                    creation and see how innovation meets design. Check it out
+                    at{" "}
+                    <a href="https://master.d3i3lan1a0whye.amplifyapp.com/">
+                      Prabhjot Sidhu's Portfolio
+                    </a>
+                    .
+                  </li>
+                  <li>
+                    🤝 Let's connect on LinkedIn! Explore my professional
+                    journey, discover shared interests, and stay updated on my
+                    latest endeavors. Connect with me at my{" "}
+                    <a href="http://www.linkedin.com/in/prabhjot-sidhu-b48b71235">
+                      LinkedIn
+                    </a>
+                    . Together, we can build meaningful professional connections
+                    and explore exciting opportunities.
+                  </li>
+                </ul>
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
@@ -374,22 +425,24 @@ function Main() {
       </Row>
       <Row className="footer-row">
         <Col className="footer-column">
-          <a className="footer-link" href="#">
-            Prabhjot Sidhu 2023
-          </a>
+          <a className="footer-link">Prabhjot Sidhu 2023</a>
         </Col>
         <Col className="footer-column">
-          <a className="footer-link" href="#">
-            sidhu.prabhjot@outlook.com
-          </a>
+          <a className="footer-link">sidhu.prabhjot@outlook.com</a>
         </Col>
         <Col className="footer-column">
-          <a className="footer-link" href="#">
+          <a
+            className="footer-link"
+            href="https://master.d3i3lan1a0whye.amplifyapp.com/"
+          >
             Portfolio
           </a>
         </Col>
         <Col className="footer-column">
-          <a className="footer-link" href="#">
+          <a
+            className="footer-link"
+            href="http://www.linkedin.com/in/prabhjot-sidhu-b48b71235"
+          >
             LinkedIn
           </a>
         </Col>
